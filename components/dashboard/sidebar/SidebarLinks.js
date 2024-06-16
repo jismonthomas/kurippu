@@ -1,7 +1,9 @@
 "use server";
 
+import { HomeIcon } from "@heroicons/react/24/solid";
 import SidebarLink from "./SidebarLink";
 import getAllTags from "@/lib/getAllTags";
+import { Home } from "lucide-react";
 
 const SidebarLinks = async () => {
   const allTags = await getAllTags();
@@ -9,7 +11,12 @@ const SidebarLinks = async () => {
   let allSidebarLinks = [
     {
       href: "/dashboard",
-      label: `All Todos`,
+      label: (
+        <span className="flex items-center gap-2">
+          <Home className="h-4 w-4" />
+          Todos
+        </span>
+      ),
     },
   ];
 

@@ -14,7 +14,7 @@ const SidebarLink = ({ href, children }) => {
   return (
     <Link
       className={cn(
-        "relative rounded-md bg-transparent px-2 py-1.5 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-900",
+        "relative rounded-md bg-transparent px-2.5 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-900",
         {
           "pointer-events-none text-slate-900": isActiveLink,
         },
