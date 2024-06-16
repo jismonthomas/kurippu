@@ -28,6 +28,10 @@ const TodoListItem = ({
     showTodoDetailsHandler(todo.todo_id);
   };
 
+  if (!todo) {
+    return;
+  }
+
   return (
     <div
       className={cn(
