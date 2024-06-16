@@ -5,7 +5,7 @@ import { Suspense } from "react";
 
 import SidebarLinks from "./SidebarLinks";
 
-import { DocumentTextIcon } from "@heroicons/react/24/outline";
+import { DocumentTextIcon } from "@heroicons/react/24/solid";
 import SidebarSkeleton from "@/components/ui/SidebarSkeleton";
 
 const Sidebar = () => {
