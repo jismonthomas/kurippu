@@ -4,8 +4,9 @@ import { HomeIcon } from "@heroicons/react/24/solid";
 import SidebarLink from "./SidebarLink";
 import getAllTags from "@/lib/getAllTags";
 import { Home } from "lucide-react";
+import { cn } from "@/lib/utils";
 
-const SidebarLinks = async () => {
+const SidebarLinks = async ({ className }) => {
   const allTags = await getAllTags();
 
   let allSidebarLinks = [
@@ -29,7 +30,7 @@ const SidebarLinks = async () => {
   }
 
   return (
-    <div className="flex flex-col gap-2 p-6">
+    <div className={cn("flex flex-col gap-2 p-6", className)}>
       {allSidebarLinks?.map((link) => {
         return (
           <SidebarLink key={link.label} href={link.href}>
