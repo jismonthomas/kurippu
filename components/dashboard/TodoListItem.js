@@ -62,8 +62,8 @@ const TodoListItem = ({
       </Button>
 
       {/* button to delete todo */}
-      <div className="absolute right-0 top-1/2 w-32 -translate-y-1/2 items-center justify-end bg-gradient-to-l from-slate-50 transition-all group-hover:flex sm:hidden">
-        <DeleteTodo todo={todo} className="" />
+      <div className="right-0 top-1/2 items-center justify-end from-slate-50 transition-all group-hover:flex md:absolute md:hidden md:w-32 md:-translate-y-1/2 md:bg-gradient-to-l">
+        <DeleteTodo todo={todo} />
       </div>
     </div>
   );
