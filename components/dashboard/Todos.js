@@ -2,19 +2,21 @@
 
 import { toast } from "sonner";
 import { useOptimistic } from "react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import addTag from "@/lib/actions/addTag";
 import addTodo from "@/lib/actions/addTodo";
+import TodoDetails from "@/components/dashboard/TodoDetails";
 import changeTodoStatus from "@/lib/actions/changeTodoStatus";
 import TodoListItem from "@/components/dashboard/TodoListItem";
-import TodoDetails from "@/components/dashboard/TodoDetails";
 import CreateTodoForm from "@/components/forms/CreateTodoForm";
 
 const Todos = ({ todos, tags }) => {
   const [optimisticTodos, addOptimisticTodo] = useOptimistic(todos);
   const [optimisticTags, addOptimisticTag] = useOptimistic(tags);
 
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
 
   const params = new URLSearchParams(searchParams);
@@ -69,7 +71,7 @@ const Todos = ({ todos, tags }) => {
 
   const showTodoDetails = (todoID) => {
     params.set("todoID", todoID);
-    window.history.pushState(null, "", `?${params.toString()}`);
+    router.replace(`${pathname}?${params.toString()}`);
   };
 
   const hideTodoDetails = () => {
@@ -77,7 +79,7 @@ const Todos = ({ todos, tags }) => {
     if (todoIDExist) {
       params.delete("todoID");
     }
-    window.history.pushState(null, "", `?${params.toString()}`);
+    router.replace(`${pathname}?${params.toString()}`);
   };
 
   // todo are sorted based on date by default
