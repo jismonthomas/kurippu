@@ -18,7 +18,7 @@ export async function middleware(request) {
     const searchParamsArray = Array.from(searchParams.entries());
     const currentSearchParams = new URLSearchParams(searchParamsArray);
     const searchTerms = currentSearchParams.toString();
-    const newSearchQuery = searchTerms ? `&${searchTerms}` : null;
+    const newSearchQuery = searchTerms ? `&${searchTerms}` : "";
 
     // return NextResponse.redirect(
     //     new URL(`/login?${callBackUrl}${query}`, request.nextUrl)
