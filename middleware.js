@@ -13,7 +13,7 @@ export async function middleware(request) {
   const { data, error } = await supabase.auth.getUser();
 
   if ((error || !data?.user) && isProtectedRoute) {
-    const callBackUrl = `callbackURL=${request.nextUrl.pathname}`;
+    const callBackUrl = `callbackURL=${path}`;
     const searchParams = request.nextUrl.searchParams;
     const searchParamsArray = Array.from(searchParams.entries());
     const currentSearchParams = new URLSearchParams(searchParamsArray);
