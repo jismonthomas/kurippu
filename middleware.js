@@ -18,14 +18,14 @@ export async function middleware(request) {
     const searchParamsArray = Array.from(searchParams.entries());
     const currentSearchParams = new URLSearchParams(searchParamsArray);
     const searchTerms = currentSearchParams.toString();
-    const query = searchTerms ? `&${searchTerms}` : "";
+    const newSearchQuery = searchTerms ? `&${searchTerms}` : null;
 
     // return NextResponse.redirect(
     //     new URL(`/login?${callBackUrl}${query}`, request.nextUrl)
     // );
 
     return NextResponse.redirect(
-      new URL(`/login?${callBackUrl}`, request.nextUrl),
+      new URL(`/login?${callBackUrl}${newSearchQuery}`, request.nextUrl),
     );
   }
 
