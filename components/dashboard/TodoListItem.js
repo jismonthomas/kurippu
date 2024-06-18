@@ -48,6 +48,8 @@ const TodoListItem = ({
       />
       {/* button to open todo modal */}
       <Button
+        aria-label={"Open Todo"}
+        title={todo.heading}
         variant="ghost"
         disabled={todo.isPending}
         onClick={showTodoDetails}
