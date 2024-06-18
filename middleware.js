@@ -12,20 +12,18 @@ export async function middleware(request) {
   const supabase = createClient();
   const { data, error } = await supabase.auth.getUser();
 
+  const searchParams = request.nextUrl.searchParams;
+  const searchParamsArray = Array.from(searchParams.entries());
+  const currentSearchParams = new URLSearchParams(searchParamsArray);
+  const searchTerms = currentSearchParams.toString();
+  const newSearchQuery = searchTerms ? `&${searchTerms}` : "";
+
   if ((error || !data?.user) && isProtectedRoute) {
-    const callBackUrl = `callbackURL=${path}`;
-    const searchParams = request.nextUrl.searchParams;
-    const searchParamsArray = Array.from(searchParams.entries());
-    const currentSearchParams = new URLSearchParams(searchParamsArray);
-    const searchTerms = currentSearchParams.toString();
-    const newSearchQuery = searchTerms ? `&${searchTerms}` : "";
-
-    // return NextResponse.redirect(
-    //     new URL(`/login?${callBackUrl}${query}`, request.nextUrl)
-    // );
-
     return NextResponse.redirect(
-      new URL(`/login?${callBackUrl}${newSearchQuery}`, request.nextUrl),
+      new URL(
+        `/login?callbackURL=${request.nextUrl.pathname}${newSearchQuery}`,
+        request.nextUrl,
+      ),
     );
   }
 
