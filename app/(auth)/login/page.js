@@ -3,14 +3,25 @@
 import Link from "next/link";
 import { Suspense } from "react";
 
+import { createClient } from "@/utils/supabase/server";
 import LoginForm from "@/components/auth/login/LoginForm";
 import { DocumentTextIcon } from "@heroicons/react/24/solid";
+import { redirect } from "next/navigation";
 
-const LoginPage = () => {
+const LoginPage = async () => {
+  const supabase = createClient();
+  const { data } = await supabase.auth.getUser();
+  const { user } = data;
+
+  // redirect user to dashboard if they are already logged in
+  if (user) {
+    redirect("/dashboard");
+  }
+
   return (
     <div className="flex w-full items-center justify-center">
       <div className="mx-10 w-full max-w-lg">
-        <div className="rounded-lg border p-10 shadow-sm">
+        <div className="rounded-lg border p-5 shadow-sm md:p-10">
           <div className="text-center">
             <div className="inline-block rounded-lg bg-gray-950 p-3 text-gray-100">
               <DocumentTextIcon className="h-6 w-6" />
