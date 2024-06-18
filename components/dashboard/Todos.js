@@ -1,7 +1,7 @@
 "use client";
 
 import { toast } from "sonner";
-import { useOptimistic } from "react";
+import { useOptimistic, useState } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import addTag from "@/lib/actions/addTag";
@@ -14,6 +14,7 @@ import CreateTodoForm from "@/components/forms/CreateTodoForm";
 const Todos = ({ todos, tags }) => {
   const [optimisticTodos, addOptimisticTodo] = useOptimistic(todos);
   const [optimisticTags, addOptimisticTag] = useOptimistic(tags);
+  const [selectedTodoID, setSelectedTodoID] = useState("");
 
   const router = useRouter();
   const pathname = usePathname();
@@ -70,16 +71,11 @@ const Todos = ({ todos, tags }) => {
   };
 
   const showTodoDetails = (todoID) => {
-    params.set("todoID", todoID);
-    router.replace(`${pathname}?${params.toString()}`);
+    setSelectedTodoID(todoID);
   };
 
   const hideTodoDetails = () => {
-    const todoIDExist = params.get("todoID");
-    if (todoIDExist) {
-      params.delete("todoID");
-    }
-    router.replace(`${pathname}?${params.toString()}`);
+    setSelectedTodoID("");
   };
 
   // todo are sorted based on date by default
@@ -122,12 +118,14 @@ const Todos = ({ todos, tags }) => {
         );
       })}
 
-      <TodoDetails
-        todoID={searchParams.get("todoID")?.toString()}
-        hideTodoDetailsHandler={hideTodoDetails}
-        tags={optimisticTags}
-        saveTag={saveTag}
-      />
+      {selectedTodoID && (
+        <TodoDetails
+          todoID={selectedTodoID}
+          hideTodoDetailsHandler={hideTodoDetails}
+          tags={optimisticTags}
+          saveTag={saveTag}
+        />
+      )}
     </div>
   );
 };
