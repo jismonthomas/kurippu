@@ -39,7 +39,7 @@ const TodoDetails = ({ todoID, hideTodoDetailsHandler, tags, saveTag }) => {
       setTodoDetails({ ...initTodoStatus, loading: true });
 
       const getTodoDetails = async () => {
-        const response = await fetch("/api/todos/", {
+        const response = await fetch("/api/todos", {
           method: "POST",
           body: JSON.stringify({ todoID }),
         });
