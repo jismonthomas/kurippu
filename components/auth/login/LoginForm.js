@@ -57,23 +57,12 @@ export default function LoginForm() {
 
   const submitForm = async (formData) => {
     startTransition(async () => {
-      const response = await login(formData);
-      // if no reponse, login is valid
-      if (!response) {
-        setFormState((state) => ({
-          ...state,
-          success: true,
-        }));
-        const callBackUrl = searchParams?.get("callbackURL");
-        const allSearchParams = Array.from(searchParams.entries());
-        const newSearchParams = new URLSearchParams(allSearchParams.slice(1)); //all search params except the first one, ie, callback url
-        const search = newSearchParams.toString();
-        const query = search ? `?${search}` : "";
+      const callBackUrl = searchParams?.get("callbackURL");
+      const url = callBackUrl ? `${callBackUrl}` : "/dashboard"; //redirect to callback or to dashboard
 
-        const url = callBackUrl ? `${callBackUrl}${query}` : "/dashboard"; //redirect to callback with all the search params received or to dashboard
-        console.log(" url to redirect", url);
-        router.push(url);
-      } else {
+      const response = await login(formData, url);
+      // if no reponse, login is valid, response is error
+      if (response) {
         setFormState((state) => ({
           ...state,
           error: response,
