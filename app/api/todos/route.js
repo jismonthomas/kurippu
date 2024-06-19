@@ -17,16 +17,3 @@ export async function POST(request) {
 
   return Response.json(response);
 }
-
-export async function DELETE(request) {
-  const { todoID } = await request.json();
-
-  if (!todoID) {
-    return;
-  }
-  const supabase = createClient();
-  const response = await supabase.from("todos").delete().eq("todo_id", todoID);
-
-  revalidatePath("/");
-  return Response.json({ response });
-}

@@ -2,7 +2,6 @@
 
 import { toast } from "sonner";
 import { useOptimistic, useState } from "react";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
 
 import addTag from "@/lib/actions/addTag";
 import addTodo from "@/lib/actions/addTodo";
@@ -15,12 +14,6 @@ const Todos = ({ todos, tags }) => {
   const [optimisticTodos, addOptimisticTodo] = useOptimistic(todos);
   const [optimisticTags, addOptimisticTag] = useOptimistic(tags);
   const [selectedTodoID, setSelectedTodoID] = useState("");
-
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
-  const params = new URLSearchParams(searchParams);
 
   const saveTodo = async (formData) => {
     const newTodo = {

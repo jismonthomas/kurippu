@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 
@@ -20,22 +19,20 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import deleteTodo from "@/lib/actions/deleteTodo";
+import { toast } from "sonner";
 
 const DeleteTodo = ({ todo, className }) => {
   const form = useForm();
-  const router = useRouter();
   const [alertOpen, setAlertOpen] = useState(false);
 
   const submitForm = async () => {
-    const response = await fetch("/api/todos/", {
-      method: "DELETE",
-      body: JSON.stringify({ todoID: todo.todo_id }),
-    });
+    const response = await deleteTodo(todo.todo_id);
 
-    if (response.ok) {
-      router.refresh();
-      setAlertOpen(false);
+    if (response?.error) {
+      toast.error(response.error);
     }
+    setAlertOpen(false);
   };
 
   if (!todo) {
