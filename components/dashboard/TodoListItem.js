@@ -41,6 +41,7 @@ const TodoListItem = ({
     >
       {/* toggle todo complete/incomplete */}
       <Checkbox
+        aria-label="Mark as completed"
         className="h-4 w-4 rounded-full border-slate-500 data-[state=checked]:bg-slate-500"
         onClick={updateTodo}
         disabled={todo.isPending}

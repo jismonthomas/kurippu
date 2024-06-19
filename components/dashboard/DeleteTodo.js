@@ -43,6 +43,7 @@ const DeleteTodo = ({ todo, className }) => {
     <AlertDialog onOpenChange={setAlertOpen} open={alertOpen}>
       <AlertDialogTrigger asChild>
         <Button
+          aria-label="Delete todo"
           variant="ghost"
           size="icon"
           disabled={todo.isPending}
