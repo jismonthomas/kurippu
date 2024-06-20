@@ -13,6 +13,7 @@ const SidebarLink = ({ href, children }) => {
 
   return (
     <Link
+      prefetch={true}
       className={cn(
         "relative rounded-md bg-transparent px-2.5 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-50 hover:text-slate-900",
         {
