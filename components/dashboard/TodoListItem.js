@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition } from "react";
+import { startTransition } from "react";
 
 import DeleteTodo from "./DeleteTodo";
 
@@ -14,7 +14,7 @@ const TodoListItem = ({
   updateTodoHandler,
   showTodoDetailsHandler,
 }) => {
-  const [_, startTransition] = useTransition();
+  startTransition;
 
   const updateTodo = async (e) => {
     e.preventDefault();
@@ -55,7 +55,7 @@ const TodoListItem = ({
         disabled={todo.isPending}
         onClick={showTodoDetails}
         className={cn(
-          "w-full justify-start px-0 py-6 hover:bg-transparent",
+          "w-full justify-start px-0 hover:bg-transparent max-lg:max-w-[75%]",
           todo.completed
             ? "text-slate-500 line-through hover:text-slate-700"
             : "",

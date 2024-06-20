@@ -1,9 +1,11 @@
 "use client";
 
+import { toast } from "sonner";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { cn } from "@/lib/utils";
+import deleteTodo from "@/lib/actions/deleteTodo";
 
 import { Trash2 } from "lucide-react";
 import { Form } from "@/components/ui/form";
@@ -19,8 +21,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import deleteTodo from "@/lib/actions/deleteTodo";
-import { toast } from "sonner";
 
 const DeleteTodo = ({ todo, className }) => {
   const form = useForm();
